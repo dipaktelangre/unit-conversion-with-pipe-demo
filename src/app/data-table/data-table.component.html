@@ -1,0 +1,126 @@
+<table class="table .table-striped">
+  <thead>
+    <tr>
+      <th class="text-center">Source Value(Random)</th>
+      <th class="text-center">Length</th>
+      <th class="text-center">Weight</th>
+      <th class="text-center">Volume</th>
+    </tr>
+    <tr>
+      <td></td>
+      <!-- ------------- length ----------- -->
+      <td class="text-center">
+        <strong>From -</strong>
+        <select
+          (change)="onChangeLength('from', $event.target.value)"
+          [(ngModel)]="lengthUnit.from"
+        >
+          <option
+            *ngFor="let length of lengthOptions"
+            value="{{ length.abbr }}"
+          >
+            {{ length.plural }}
+          </option>
+        </select>
+        <strong> To - </strong>
+        <select
+          (change)="onChangeLength('to', $event.target.value)"
+          [(ngModel)]="lengthUnit.to"
+        >
+          <option
+            *ngFor="let length of lengthOptions"
+            value="{{ length.abbr }}"
+          >
+            {{ length.plural }}
+          </option>
+        </select>
+      </td>
+      <!-- ------------------- Weigth ------------------ -->
+
+      <td class="text-center">
+        <strong>From -</strong>
+        <select
+          (change)="onChangeWeigth('from', $event.target.value)"
+          [(ngModel)]="weigthUnit.from"
+        >
+          <option
+            *ngFor="let weigth of weigthOptions"
+            value="{{ weigth.abbr }}"
+          >
+            {{ weigth.plural }}
+          </option>
+        </select>
+        <strong> To - </strong>
+        <select
+          (change)="onChangeWeigth('to', $event.target.value)"
+          [(ngModel)]="weigthUnit.to"
+        >
+          <option
+            *ngFor="let weigth of weigthOptions"
+            value="{{ weigth.abbr }}"
+          >
+            {{ weigth.plural }}
+          </option>
+        </select>
+      </td>
+      <!-- ------------------------- Volume ----------------- -->
+      <td class="text-center">
+        <strong>From -</strong>
+        <select
+          (change)="onChangeVolume('from', $event.target.value)"
+          [(ngModel)]="volumeUnit.from"
+        >
+          <option
+            *ngFor="let volume of volumeOptions"
+            value="{{ volume.abbr }}"
+          >
+            {{ volume.plural }}
+          </option>
+        </select>
+        <strong> To - </strong>
+        <select
+          (change)="onChangeVolume('to', $event.target.value)"
+          [(ngModel)]="volumeUnit.to"
+        >
+          <option
+            *ngFor="let volume of volumeOptions"
+            value="{{ volume.abbr }}"
+          >
+            {{ volume.plural }}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">
+        <input type="number" [(ngModel)]="inputNumber" />
+      </td>
+      <td class="text-center">
+        {{ inputNumber | unitConvert: lengthUnit.from:lengthUnit.to }}
+      </td>
+      <td class="text-center">
+        {{ inputNumber | unitConvert: weigthUnit.from:weigthUnit.to }}
+      </td>
+      <td class="text-center">
+        {{ inputNumber | unitConvert: volumeUnit.from:volumeUnit.to }}
+      </td>
+    </tr>
+    <!-- ---------------------------- Random --------------- -->
+    <tr *ngFor="let randomNum of randomNumbers$ | async">
+      <td class="text-center">
+        <strong>{{ randomNum }}</strong>
+      </td>
+      <td class="text-center">
+        {{ randomNum | unitConvert: lengthUnit.from:lengthUnit.to }}
+      </td>
+      <td class="text-center">
+        {{ randomNum | unitConvert: weigthUnit.from:weigthUnit.to }}
+      </td>
+      <td class="text-center">
+        {{ randomNum | unitConvert: volumeUnit.from:volumeUnit.to }}
+      </td>
+    </tr>
+  </tbody>
+</table>
